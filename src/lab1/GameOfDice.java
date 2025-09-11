@@ -1,5 +1,7 @@
 package lab1;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Random;
 
@@ -176,13 +178,14 @@ public class GameOfDice
 
     /**
      * Метод, воспроизводящий один раунд игры в кости
-     * @return Id победившего в раунде игрока
+     * @return Id игроков с максимальным счетом в раунде
      */
-    private int playRound()
+    private List<Integer> playRound()
     {
         this.round_number_n++;
 
-        int max_dice_id = last_winner;
+        List<Integer> max_dice_id = new ArrayList<>();
+
         // Первым ходит победитель прошлого раунда.
         for(int i = 0; i < this.player_count; ++i)
         {
@@ -194,24 +197,28 @@ public class GameOfDice
                 // Выводим сообщение в консоль.
                 System.out.printf("Игрок %d отказался продолжать игру, игра завершится преждевременно.\n",
                         (i + last_winner) % player_count + 1);
-                return -1; // Завершаем раунд с кодом -1.
+                return new ArrayList<>(); // Завершаем раунд с кодом -1.
             }
 
             // Выводится сообщение в консоль.
             System.out.printf("Игрок %d выбросил число %d\n", (i + last_winner) % player_count + 1, curr_dice);
-            // Запоминается игрок, выбросивший наивысшую сумму очков.
-            if (this.players[max_dice_id].last_score < curr_dice)
+            // Запоминается игрока, выбросивший наивысшую сумму очков.
+            if (max_dice_id.isEmpty() || this.players[max_dice_id.get(0)].last_score < curr_dice)
             {
-                max_dice_id = (i + last_winner) % player_count;
+                max_dice_id.clear();
+                max_dice_id.add((i + last_winner) % player_count);
+            }
+            // В случае ничьей все игроки с максимальным счетом добавляются в список
+            else if (this.players[max_dice_id.get(0)].last_score == curr_dice)
+            {
+                max_dice_id.add((i + last_winner) % player_count);
             }
         }
 
-        // Выводится сообщение о победе игрока с наивысшим количеством очков в этом раунде.
-        System.out.printf("В раунде %d Победил игрок %d!\n", this.round_number_n, max_dice_id+1);
-        this.last_winner = max_dice_id; // Победитель раунда запоминается - с него начнется ход в следующем раунде.
-        this.N_wins[max_dice_id]++; // Количество побед для игрока победителя увеличивается на 1.
         return max_dice_id;
     }
+
+
 
     /**
      * Метод в котором ведется цикл игры до ее конца.
@@ -223,9 +230,9 @@ public class GameOfDice
         while(counter < 1000)
         {
             ++counter;
-            int round_score = this.playRound(); // Игроки играют один раунд.
+            List<Integer> round_winners = this.playRound(); // Игроки играют один раунд.
             // Один из игроков отказался кидать кости:
-            if (round_score < 0)
+            if (round_winners.isEmpty())
             {
                 // Находим игрока с максимальным количеством выигрышей:
                 int max_wins = 0;
@@ -240,14 +247,42 @@ public class GameOfDice
                 System.out.printf("В игре победил игрок %d!!!\n", max_wins+1);
                 return;
             }
-
-            // Проверка условия окончания игры:
-            for (int i = 0; i < this.player_count; ++i)
+            // Если есть явный победитель
+            else if (round_winners.size() == 1)
             {
-                if (this.N_wins[i] == n_wins) {
-                    System.out.printf("В игре победил игрок %d!!!\n", i+1);
-                    return;
+                this.last_winner = round_winners.get(0); // Победитель раунда запоминается - с него начнется ход в следующем раунде.
+                // Выводится сообщение о победе игрока с наивысшим количеством очков в этом раунде.
+                System.out.printf("В раунде %d победил игрок %d!\n", this.round_number_n, this.last_winner+1);
+                this.N_wins[this.last_winner]++; // Количество побед для игрока победителя увеличивается на 1.
+
+                // Проверка условия окончания игры:
+                for (int i = 0; i < this.player_count; ++i)
+                {
+                    if (this.N_wins[i] == n_wins) {
+                        System.out.printf("В игре победил игрок %d!!!\n", i+1);
+                        return;
+                    }
                 }
+            }
+            // Если победителя нет - то есть если у двух и более игроков одинаковый счет
+            else
+            {
+                // Вывод соответствующего сообщения
+                StringBuilder message = new StringBuilder();
+                message.append("В раунде ");
+                message.append(round_number_n);
+                message.append(" у игроков ");
+                for (int i = 0; i < round_winners.size()-1; ++i)
+                {
+                    message.append(round_winners.get(i)+1);
+                    message.append(", ");
+                }
+                message.append(round_winners.get(round_winners.size()-1)+1);
+                message.append(" одинаковый счет, победителей нет! \n");
+
+                System.out.println(message);
+
+                // Дальше ничего не делаем, переходим в цикле к следующему раунду
             }
         }
     }
