@@ -132,11 +132,11 @@ public class SquareSolver
     @Override
     public String toString()
     {
-        return '{' +
-                "a=" + coef_a +
-                ", b=" + coef_b +
-                ", c=" + coef_c +
-                ", D=" + disc_finder.getD() +
-                '}';
+        return "{ " +
+                this.coef_a + "*x^2 + " +
+                this.coef_b + "*x + " +
+                this.coef_c +
+                " ; D=" + this.disc_finder.getD() +
+                " }";
     }
 }

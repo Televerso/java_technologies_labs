@@ -8,7 +8,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        task2();
+        task1();
     }
 
     /**
@@ -17,15 +17,16 @@ public class Main {
     public static void task1() {
         // Ввод исходных данных с консоли
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter parameter a: ");
+        System.out.println("Введите параметр a: ");
         double a = input.nextDouble();
-        System.out.println("Enter parameter b: ");
+        System.out.println("Введите параметр b: ");
         double b = input.nextDouble();
-        System.out.println("Enter parameter c: ");
+        System.out.println("Введите параметр c: ");
         double c = input.nextDouble();
 
         // Решение уравнения
         SquareSolver square_problem = new SquareSolver(a,b,c);
+        System.out.println(square_problem);
         List<Double> solution = square_problem.solve();
 
         // Вывод ответа в консоль
@@ -38,9 +39,9 @@ public class Main {
     public static void task2() {
         // Ввод начальных значений с консоли
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter parameter N: ");
+        System.out.println("Введите параметр N: ");
         int n = input.nextInt();
-        System.out.println("Enter parameter M: ");
+        System.out.println("Введите параметр M: ");
         int m = input.nextInt();
 
         // Запуск игры
