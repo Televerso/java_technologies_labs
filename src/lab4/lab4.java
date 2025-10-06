@@ -1,5 +1,6 @@
 package lab4;
 
+import lab4.BinaryTree.BinaryTree;
 import lab4.DateFormatter.DateFormatter;
 import lab4.DateFormatter.Tester;
 import lab4.PersonClass.Person;
@@ -49,5 +50,21 @@ public class lab4 {
         System.out.println(StringSorter.revSort(StringToSetAnalyzer.getOpExChars(str4,str2)));
         System.out.println(StringSorter.hashSort(StringToSetAnalyzer.getOpOrChars(str2,str3)));
 
+    }
+
+    public static void task4(){
+        BinaryTree tree = new BinaryTree();
+
+        for (int i = 1; i <= 10; i++) {
+            tree.insert((i+4)%10);
+            tree.insert(i);
+        }
+
+        System.out.println(tree.straightPass());
+        System.out.println(tree.centerPass());
+        System.out.println(tree.reversePass());
+
+        System.out.println(tree.length());
+        System.out.println(tree.maxDepth());
     }
 }

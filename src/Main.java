@@ -7,6 +7,6 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        lab4.task3();
+        lab4.task4();
     }
 }
