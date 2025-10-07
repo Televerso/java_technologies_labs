@@ -153,28 +153,47 @@ public class Person
     {
         StringBuilder str = new StringBuilder();
 
+        // Выбор формата
         switch (format) {
+            // Короткий формат
             case 's':
+                // День в формате DD
+                if (PersonBirthday.get(Calendar.DAY_OF_MONTH) < 10)
+                    str.append("0");
                 str.append(PersonBirthday.get(Calendar.DAY_OF_MONTH));
                 str.append('.');
+                // Месяц в формате MM
                 if (PersonBirthday.get(Calendar.MONTH) + 1 < 10)
                     str.append('0');
                 str.append(PersonBirthday.get(Calendar.MONTH) + 1);
                 str.append('.');
+                // Год в формате YYYY
                 str.append(PersonBirthday.get(Calendar.YEAR));
                 break;
+            // Средний формат
             case 'm':
+                // День в формате DD
+                if (PersonBirthday.get(Calendar.DAY_OF_MONTH) < 10)
+                    str.append("0");
                 str.append(PersonBirthday.get(Calendar.DAY_OF_MONTH));
                 str.append('-');
+                // Месяц в сокращенном текстовом формате (прим.: 'feb')
                 str.append(PersonBirthday.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH));
                 str.append('-');
+                // Год в формате YYYY
                 str.append(PersonBirthday.get(Calendar.YEAR));
                 break;
+            // Полный формат
             case 'l':
+                // День в формате DD
+                if (PersonBirthday.get(Calendar.DAY_OF_MONTH) < 10)
+                    str.append("0");
                 str.append(PersonBirthday.get(Calendar.DAY_OF_MONTH));
                 str.append(" - ");
+                // Месяц в полном текстовом формате (прим.: 'february')
                 str.append(PersonBirthday.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH));
                 str.append(" - ");
+                // Год в формате YYYY
                 str.append(PersonBirthday.get(Calendar.YEAR));
                 break;
             default:

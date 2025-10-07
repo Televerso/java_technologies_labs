@@ -4,8 +4,15 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.StringTokenizer;
 
-
+/**
+ * Класс со статическими методами для работы с датами
+ */
 public class DateFormatter {
+    /**
+     * Проверяет, является ли содержимое строки int
+     * @param str передаваемая строка
+     * @return true/false
+     */
     private static boolean isNumber(String str)
     {
         try {
@@ -17,6 +24,11 @@ public class DateFormatter {
         }
     }
 
+    /**
+     * Конвертирует тестовое представление месяца в числовой формат
+     * @param month строка вида "february" или 'feb" (регистр не учитывается)
+     * @return число - номер месяца (от 1 до 12)
+     */
     private static int MonthToInt(String month){
         month = month.toLowerCase();
         switch(month) {
@@ -85,22 +97,33 @@ public class DateFormatter {
         return Integer.parseInt(month);
     }
 
+    /**
+     * Конвертирует строку в объект типа Calendar
+     * @param input строка в формате <Год><Месяц><Число> или <Год><Месяц><Число><Час><Минута>
+     *              <br> (возможные разделители ' :;.,-')
+     * @return объект Calendar, соответствующий введенной дате
+     */
     public static Calendar formatDate(String input) {
-        if (input == null || input.isEmpty()) {throw new IllegalArgumentException();}
+        if (input == null) {throw new NullPointerException();}
+        if (input.isEmpty()) {throw new IllegalArgumentException();}
 
         input = input.trim();
+
         StringTokenizer st = new StringTokenizer(input, " :;.,-");
+        // Проверка количества введенных значений
         if (st.countTokens() != 3 && st.countTokens() != 5) {throw new IllegalArgumentException();}
 
-
+        // Обработка первого значения - года даты
         int year = Integer.parseInt(st.nextToken());
 
-
+        // Обработка второго значения - месяца даты
         int month;
         String month_str = st.nextToken();
+        // Месяц представлен в виде числа формата MM
         if (isNumber(month_str) && (month_str.length() == 2)) {
             month = Integer.parseInt(month_str);
         }
+        // Месяц в строковом виде
         else if (!isNumber(month_str)) {
             month = MonthToInt(month_str);
         }
@@ -108,11 +131,13 @@ public class DateFormatter {
             throw new IllegalArgumentException("Invalid month: " + month_str);
         }
 
-
+        // Обработка третьего значения - день даты
         int day = Integer.parseInt(st.nextToken());
 
+        // Проверяем, остались ли в буфере еще значения
         if (st.countTokens() > 0)
         {
+            // Если да, обрабатываем их - час и минуту
             int hour = Integer.parseInt(st.nextToken());
             int minute = Integer.parseInt(st.nextToken());
 
@@ -123,6 +148,11 @@ public class DateFormatter {
         }
     }
 
+    /**
+     * Преобразует объект типа Calendar к строковому представлению
+     * @param date объект Calendar
+     * @return строковое представление даты в формате DD.MM.YYYY HH:mm
+     */
     public static String dateToString(Calendar date) {
         StringBuilder str = new StringBuilder();
 

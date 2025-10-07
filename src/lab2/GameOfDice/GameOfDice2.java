@@ -2,8 +2,6 @@ package lab2.GameOfDice;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
 
 /**
  * Класс для игры в кости.

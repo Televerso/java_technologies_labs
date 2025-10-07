@@ -1,6 +1,9 @@
 package lab1.PersonsAddress;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  * Класс для работы с массивом объектов "человек".

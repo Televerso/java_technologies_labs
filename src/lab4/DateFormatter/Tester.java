@@ -1,5 +1,8 @@
 package lab4.DateFormatter;
 
+/**
+ * Проверочный класс для второго задания
+ */
 public class Tester {
     public static void test() {
         if(!DateFormatter.dateToString(DateFormatter.formatDate("2002-02-02 20:02")).equals("02.02.2002 20:02"))

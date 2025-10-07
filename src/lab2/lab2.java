@@ -1,9 +1,11 @@
 package lab2;
 
-import lab1.GameOfDice;
-import lab2.AniVoice.*;
-
-import lab2.Cat.*;
+import lab2.AniVoice.AniVoice;
+import lab2.AniVoice.Cat;
+import lab2.AniVoice.Cow;
+import lab2.AniVoice.Dog;
+import lab2.Cat.CatImpl;
+import lab2.Cat.CatInterface;
 import lab2.ExtendedClass.ExtendedClass;
 import lab2.GameOfDice.GameOfDice2;
 
