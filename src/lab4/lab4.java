@@ -5,7 +5,7 @@ import lab4.DateFormatter.DateFormatter;
 import lab4.DateFormatter.Tester;
 import lab4.PersonClass.Person;
 import lab4.StringAnalyzer.StringSorter;
-import lab4.StringAnalyzer.StringToSetAnalyzer;
+import lab4.StringAnalyzer.StringAnalyzer;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -54,6 +54,16 @@ public class lab4 {
      * Код для задания 3
      */
     public static void task3() {
+        // 1я часть задания
+        String str0 = "cats do not like apples, cats like meat";
+
+        System.out.println("Исходная строка: '" + str0 + "'");
+        System.out.println("Результат частотного анализа слов в строке: ");
+        System.out.println(StringAnalyzer.getWordFrequency(str0));
+        System.out.println("Результат частотного анализа символов в строке: ");
+        System.out.println(StringAnalyzer.getCharFrequency(str0));
+        System.out.println();
+
         // Примерочные строки
         String str1 = "apple";
         String str2 = "banana";
@@ -62,21 +72,21 @@ public class lab4 {
 
         // Выводы....
         System.out.println("Символы в строке 1: '" + str1 + "'");
-        System.out.println('<' + StringToSetAnalyzer.toSetString(str1) + '>');
+        System.out.println('<' + StringAnalyzer.toSetString(str1) + '>');
         System.out.println("Символы в строке 2: '" + str2 + "'");
-        System.out.println('<' + StringToSetAnalyzer.toSetString(str2) + '>');
+        System.out.println('<' + StringAnalyzer.toSetString(str2) + '>');
         System.out.println("Символы в строке 3: '" + str3 + "'");
-        System.out.println('<' + StringToSetAnalyzer.toSetString(str3) + '>');
+        System.out.println('<' + StringAnalyzer.toSetString(str3) + '>');
         System.out.println("Символы в строке 4: '" + str4 + "'");
-        System.out.println('<' + StringToSetAnalyzer.toSetString(str4) + '>');
+        System.out.println('<' + StringAnalyzer.toSetString(str4) + '>');
         System.out.println();
 
         System.out.println("Вывод символов, входящих во вторую и в третью строку, в алфавитном (обычном) порядке");
-        System.out.println(StringSorter.sort(StringToSetAnalyzer.getOpAndChars(str2,str3)));
+        System.out.println(StringSorter.sort(StringAnalyzer.getOpAndChars(str2,str3)));
         System.out.println("Вывод символов, входящих в четвертую и не входящих во вторую строку, в обратном порядке");
-        System.out.println(StringSorter.revSort(StringToSetAnalyzer.getOpExChars(str4,str2)));
+        System.out.println(StringSorter.revSort(StringAnalyzer.getOpExChars(str4,str2)));
         System.out.println("Вывод символов, входящих хотя бы в одну из первой и второй строк, в порядке, соответствующим заданию 3");
-        System.out.println(StringSorter.hashSort(StringToSetAnalyzer.getOpOrChars(str1,str2)));
+        System.out.println(StringSorter.hashSort(StringAnalyzer.getOpOrChars(str1,str2)));
 
     }
 

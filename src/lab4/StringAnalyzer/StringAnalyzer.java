@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 /**
  * Класс для анализа строк
  */
-public class StringToSetAnalyzer {
+public class StringAnalyzer {
     /**
      * Преобразует set в строку без служебных символов
      * @param set объект set
@@ -28,8 +28,15 @@ public class StringToSetAnalyzer {
      * @return HashMap, в котором ключами являются слова, а значениями - их количество в строке
      */
     public static HashMap<String,Integer> getWordFrequency(String str) {
-        // TODO
-        return null;
+        HashMap<String,Integer> map = new HashMap<>();
+
+        String[] words = str.split("[ .,:;]|( - )");
+
+        for (String word : words) {
+            if (!word.isEmpty())
+                map.put(word, map.getOrDefault(word, 0) + 1);
+        }
+        return map;
     }
 
     /**
@@ -38,8 +45,12 @@ public class StringToSetAnalyzer {
      * @return HashMap, в котором ключами являются символы, а значениями - их количество в строке
      */
     public static HashMap<Character,Integer> getCharFrequency(String str) {
-        // TODO
-        return null;
+        HashMap<Character,Integer> map = new HashMap<>();
+
+        for (char c : str.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+        return map;
     }
 
     /**
