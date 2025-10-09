@@ -1,4 +1,8 @@
-import lab4.lab4;
+import lab1.*;
+import lab2.*;
+import lab3.*;
+import lab4.*;
+
 
 public class Main {
     public static void main(String[] args) {

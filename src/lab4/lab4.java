@@ -86,7 +86,7 @@ public class lab4 {
         System.out.println("Вывод символов, входящих в четвертую и не входящих во вторую строку, в обратном порядке");
         System.out.println(StringSorter.revSort(StringAnalyzer.getOpExChars(str4,str2)));
         System.out.println("Вывод символов, входящих хотя бы в одну из первой и второй строк, в порядке, соответствующим заданию 3");
-        System.out.println(StringSorter.hashSort(StringAnalyzer.getOpOrChars(str1,str2)));
+        System.out.println(StringSorter.hashSort(StringAnalyzer.getOpOrChars(str1,str2),2));
 
     }
 

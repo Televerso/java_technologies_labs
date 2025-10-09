@@ -1,6 +1,7 @@
 package lab4.StringAnalyzer;
 
-import java.util.Arrays;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Класс сортировки порядка символов в строке
@@ -34,12 +35,13 @@ public class StringSorter {
         return new String(chars);
     }
 
-
-    // TODO actually implement this method
-    public static String hashSort(String str) {
-        char[] chars = str.toCharArray();
-        Arrays.sort(chars);
-        return new String(chars);
+    public static String hashSort(String str, int shiftBits) {
+        return str.chars()
+                .boxed()
+                .sorted(Comparator.comparingInt(c -> Integer.rotateLeft(c.hashCode(), shiftBits)))
+                .map(Character::toChars)
+                .map(String::valueOf)
+                .collect(Collectors.joining());
     }
 
 
