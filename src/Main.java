@@ -3,10 +3,11 @@ import lab2.*;
 import lab3.*;
 import lab4.*;
 import lab5.*;
+import lab6.*;
 
 
 public class Main {
     public static void main(String[] args) {
-        lab5.task4();
+        lab6.task4();
     }
 }
